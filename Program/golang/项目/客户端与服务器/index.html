@@ -1,0 +1,687 @@
+<!-- build time:Wed Dec 27 2023 18:05:50 GMT+0800 (Central Standard Time) --><!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#FFF"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png"><link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" type="application/rss+xml" title="余星酒" href="http://example.com/rss.xml"><link rel="alternate" type="application/atom+xml" title="余星酒" href="http://example.com/atom.xml"><link rel="alternate" type="application/json" title="余星酒" href="http://example.com/feed.json"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/css/app.css?v=0.2.5"><meta name="keywords" content="Golang,Golang项目"><link rel="canonical" href="http://example.com/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/"><title>客户端与服务器 - 项目 - Golang - 编程 | 余星酒 = 余星酒 = 痴看年少风雨疾，一转本生蹉跎游</title><meta name="generator" content="Hexo 6.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">客户端与服务器</h1><div class="meta"><span class="item" title="创建时间：2023-07-28 19:12:00"><span class="icon"><i class="ic i-calendar"></i> </span><span class="text">发表于</span> <time itemprop="dateCreated datePublished" datetime="2023-07-28T19:12:00+08:00">2023-07-28</time></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span> <span class="line"></span> <span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">余星酒</a></li></ul><ul class="right"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div id="imgs" class="pjax"><ul><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipeuibk9fj20zk0m8ay2.jpg"></li><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipeu7txpzj20zk0m81kx.jpg"></li><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclh5u05ej20zk0m87df.jpg"></li><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1gipeyvx1d4j20zk0m8hdt.jpg"></li><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclfb3vzhj20zk0m8wny.jpg"></li><li class="item" data-background-image="https://tva1.sinaimg.cn/large/6833939bly1giclh0m9pdj20zk0m8hdt.jpg"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"/><use xlink:href="#gentle-wave" x="48" y="3"/><use xlink:href="#gentle-wave" x="48" y="5"/><use xlink:href="#gentle-wave" x="48" y="7"/></g></svg></div><main><div class="inner"><div id="main" class="pjax"><div class="article wrap"><div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i> <span><a href="/">首页</a></span><i class="ic i-angle-right"></i> <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Program/" itemprop="item" rel="index" title="分类于 编程"><span itemprop="name">编程</span></a><meta itemprop="position" content="1"></span><i class="ic i-angle-right"></i> <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Program/Golang/" itemprop="item" rel="index" title="分类于 Golang"><span itemprop="name">Golang</span></a><meta itemprop="position" content="2"></span><i class="ic i-angle-right"></i> <span class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Program/Golang/%E9%A1%B9%E7%9B%AE/" itemprop="item" rel="index" title="分类于 项目"><span itemprop="name">项目</span></a><meta itemprop="position" content="3"></span></div><article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://example.com/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.jpg"><meta itemprop="name" content="余星酒"><meta itemprop="description" content="痴看年少风雨疾，一转本生蹉跎游, 欢迎参观我的笔记空间 ~ 这里主要会记录一些安全相关的学习笔记 🌸"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="余星酒"></span><div class="body md" itemprop="articleBody"><h1 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h1><p>http 是一种无状态协议，服务器不会维护每个请求的状态，而是通过多种方式分钟其状态，这些方式可能包括标识符、cookie、HTTP 标头等，客户端和服务器有责任协商和验证状态</p><h2 id="http"><a href="#http" class="headerlink" title="http"></a>http</h2><h3 id="http-Get"><a href="#http-Get" class="headerlink" title="http.Get()"></a>http.Get()</h3><pre><code class="go">http.Get(url string)
+</code></pre><pre><code class="go">package httpclient
+
+import (
+    &quot;bufio&quot;
+    &quot;fmt&quot;
+    &quot;io&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+)
+
+func Client() &#123;
+    r, err := http.Get(&quot;https://www.baidu.com/robots.txt&quot;)
+    if err != nil &#123;
+        log.Fatalln(&quot;请求错误&quot;)
+    &#125;
+    body := bufio.NewReader(r.Body)
+    b, _ := io.ReadAll(body)
+    fmt.Printf(&quot;b: %v\n&quot;, string(b))
+    r.Body.Close()
+&#125;
+</code></pre><h3 id="http-Post"><a href="#http-Post" class="headerlink" title="http.Post()"></a>http.Post()</h3><pre><code class="go">http.Post(url string, bodyType string, body io.Reader)
+</code></pre><pre><code class="go">package httpclient
+
+import (
+    &quot;net/http&quot;
+    &quot;net/url&quot;
+    &quot;strings&quot;
+)
+
+func Client() &#123;
+    form := url.Values&#123;&#125;
+    form.Add(&quot;name&quot;, &quot;tom&quot;)
+    r, err := http.Post(
+        &quot;https://www.baidu.com/robots.txt&quot;,
+        &quot;application/x-www-form-urlencoded&quot;,
+        strings.NewReader(form.Encode()),
+    )
+    if err != nil &#123;
+        log.Panicln(&quot;请求错误&quot;)
+    &#125;
+    r.Body.Close()
+&#125;
+</code></pre><h3 id="http-PostForm"><a href="#http-PostForm" class="headerlink" title="http.PostForm()"></a>http.PostForm()</h3><pre><code class="go">http.PostForm(url string, data url.Values)
+</code></pre><pre><code class="go">package httpclient
+
+import (
+    &quot;net/http&quot;
+    &quot;net/url&quot;
+    &quot;strings&quot;
+)
+
+func Client() &#123;
+    form := url.Values&#123;&#125;
+    form.Add(&quot;name&quot;, &quot;tom&quot;)
+    r, err := http.PostForm(
+        &quot;https://www.baidu.com/robots.txt&quot;,
+        form,
+    )
+    if err != nil &#123;
+        log.Panicln(&quot;请求错误&quot;)
+    &#125;
+    r.Body.Close()
+&#125;
+</code></pre><h3 id="http-Head"><a href="#http-Head" class="headerlink" title="http.Head()"></a>http.Head()</h3><pre><code class="go">http.Head(url string)
+
+package httpclient
+
+import (
+    &quot;log&quot;
+    &quot;net/http&quot;
+)
+
+func Client() &#123;
+    r, err := http.Head(&quot;https://www.baidu.com/robots.txt&quot;)
+    if err != nil &#123;
+        log.Fatalln(&quot;请求错误&quot;)
+    &#125;
+    r.Body.Close()
+&#125;
+</code></pre><h2 id="生成请求"><a href="#生成请求" class="headerlink" title="生成请求"></a>生成请求</h2><p><strong>http.NewRequest()</strong></p><p>使用函数 NewRequest()创建结构体 Request，使用 http.Client.Do()发送该及饿哦固体</p><pre><code class="go">http.NewRequest(method, url string, body io.Reader)
+</code></pre><pre><code class="go">http.Client.Do(req *Request)
+</code></pre><h3 id="get-请求"><a href="#get-请求" class="headerlink" title="get 请求"></a>get 请求</h3><pre><code class="go">package httpclient
+
+import (
+    &quot;bufio&quot;
+    &quot;fmt&quot;
+    &quot;io&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+)
+
+func Client() &#123;
+    var client http.Client
+    r, err := http.NewRequest(&quot;GET&quot;, &quot;https://www.baidu.com/robots.txt&quot;, nil)
+    if err != nil &#123;
+        log.Fatalln(&quot;请求错误&quot;)
+    &#125;
+    r.Header.Add(&quot;User-Agent&quot;, &quot;123&quot;)
+    resp, _ := client.Do(r)
+    body := bufio.NewReader(resp.Body)
+    b, _ := io.ReadAll(body)
+    fmt.Printf(&quot;string(b): %v\n&quot;, string(b))
+&#125;
+</code></pre><h3 id="post-请求"><a href="#post-请求" class="headerlink" title="post 请求"></a>post 请求</h3><pre><code class="go">package httpclient
+
+import (
+    &quot;bufio&quot;
+    &quot;fmt&quot;
+    &quot;io&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+    &quot;net/url&quot;
+    &quot;strings&quot;
+)
+
+func Client() &#123;
+    form := url.Values&#123;&#125;
+    form.Add(&quot;name&quot;, &quot;tom&quot;)
+    var client http.Client
+    r, err := http.NewRequest(
+        &quot;POST&quot;,
+        &quot;https://www.baidu.com/robots.txt&quot;,
+        strings.NewReader(form.Encode()),
+    )
+    if err != nil &#123;
+        log.Fatalln(&quot;请求错误&quot;)
+    &#125;
+    r.Header.Add(&quot;User-Agent&quot;, &quot;123&quot;)
+    resp, _ := client.Do(r)
+    body := bufio.NewReader(resp.Body)
+    b, _ := io.ReadAll(body)
+    fmt.Printf(&quot;string(b): %v\n&quot;, string(b))
+&#125;
+</code></pre><h2 id="结构化解析"><a href="#结构化解析" class="headerlink" title="结构化解析"></a>结构化解析</h2><h3 id="内容解析"><a href="#内容解析" class="headerlink" title="内容解析"></a>内容解析</h3><pre><code class="go">package httpclient
+
+import (
+    &quot;bufio&quot;
+    &quot;fmt&quot;
+    &quot;io&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+)
+
+func clientGet() &#123;
+    r, err := http.Get(&quot;https://www.baidu.com/robots.txt&quot;)
+    if err != nil &#123;
+        log.Fatalln(&quot;请求错误&quot;)
+    &#125;
+    body := bufio.NewReader(r.Body)
+    b, _ := io.ReadAll(body) // 解析
+    fmt.Printf(&quot;b: %v\n&quot;, string(b))
+    r.Body.Close()
+&#125;
+</code></pre><p>通过 GET 请求返回一个变量 r(*Response 结构体类型)的响应后，r 类型包含一个可输出的参数 Body （io.ReadCloser），io.ReadCloser 充当 io.Reader 和 io.Closer 的接口，或者是需要实现 Close()函数以及关闭 reader 并执行任何清理的接口，从 io.ReadCloser()读取数据后，需要在响应正文上嗲用 Close()函数关闭（也可以添加 defer 进行关闭）</p><h3 id="json-解析"><a href="#json-解析" class="headerlink" title="json 解析"></a>json 解析</h3><p>定义一个 Value 的结构体，其中包含了服务器响应中的预期元素（这里只写了部分），主函数宪法起请求，解码响应正文后，通过访问可输出的数据类型 Value 来查询结构体 Value</p><p>也就是先定义一个用来表示响应数据的结构体，然后把数据解码到该结构体中</p><pre><code class="go">package httpclient
+
+import (
+    &quot;encoding/json&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+)
+
+type Value struct &#123;
+    Page    int        `json:&quot;page&quot;`
+    Results [][]string `json:&quot;results&quot;`
+&#125;
+
+func Client() &#123;
+    https := &quot;https://fofa.info/api/v1/search/all?email=fofa_email&amp;key=fofa_key&amp;qbase64=dGl0bGU9ImJpbmci&quot;
+    var (
+        client http.Client
+        value  Value
+    )
+    r, err := http.NewRequest(&quot;GET&quot;, https, nil)
+    if err != nil &#123;
+        log.Fatalln(&quot;错误数据&quot;)
+    &#125;
+    r.Header.Add(&quot;Content-Type&quot;, &quot;application/json&quot;)
+    resp, err := client.Do(r)
+    if err != nil &#123;
+        log.Fatalln(&quot;请求错误&quot;)
+    &#125;
+    err = json.NewDecoder(resp.Body).Decode(&amp;value)
+    if err != nil &#123;
+        log.Fatalln(&quot;解析错误&quot;)
+    &#125;
+    log.Printf(&quot;page -&gt; %d\n&quot;, value.Page)
+    log.Printf(&quot;result -&gt; %s\n&quot;, value.Results)
+
+    defer resp.Body.Close()
+&#125;
+</code></pre><h1 id="与fofa交互"><a href="#与fofa交互" class="headerlink" title="与fofa交互"></a>与fofa交互</h1><ol><li>fofa-api的初始化</li><li>对请求接口的数据进行整理</li><li>请求结果进行处理</li><li>输出结果</li></ol><h2 id="api-go"><a href="#api-go" class="headerlink" title="api.go"></a>api.go</h2><pre><code class="go">package fofa
+
+const URLApi = &quot;https://fofa.info/api/v1/search/all&quot;
+
+type Client struct &#123;
+    email   string
+    apikey  string
+    qbase64 string
+    fields  string
+&#125;
+
+func New(email, key, qbase64, fields string) *Client &#123;
+    return &amp;Client&#123;
+        email:   email,
+        apikey:  key,
+        qbase64: qbase64,
+        fields:  fields,
+    &#125;
+&#125;
+</code></pre><h2 id="get-information-go"><a href="#get-information-go" class="headerlink" title="get_information.go"></a>get_information.go</h2><pre><code class="go">package fofa
+
+import (
+    &quot;encoding/base64&quot;
+    &quot;encoding/json&quot;
+    &quot;fmt&quot;
+    &quot;io&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+)
+
+type State struct &#123;
+    Size    int        `json:&quot;size&quot;`
+    Page    int        `json:&quot;page&quot;`
+    Query   string     `json:&quot;query&quot;`
+    Results [][]string `json:&quot;results&quot;`
+&#125;
+
+var ParseData State
+
+func ParseJson(resp io.Reader) &#123;
+    err := json.NewDecoder(resp).Decode(&amp;ParseData)
+    if err != nil &#123;
+        log.Fatalln(&quot;处理数据失败&quot;)
+    &#125;
+    fmt.Printf(&quot;ParseData.Size: %v\n&quot;, ParseData.Size)
+    fmt.Printf(&quot;ParseData.Query: %v\n&quot;, ParseData.Query)
+    fmt.Printf(&quot;ParseData.Page: %v\n&quot;, ParseData.Page)
+    for _, v := range ParseData.Results &#123;
+        println(v[0], v[1], v[2], v[3])
+    &#125;
+&#125;
+func GetFOFA() &#123;
+    var client http.Client
+    s := base64.StdEncoding.EncodeToString([]byte(&quot;zzcms&quot;))
+    info := New(
+        &quot;3035277443@qq.com&quot;,
+        &quot;56c06cea46c1f50339ac7b6a7425b2da&quot;,
+        s,
+        &quot;host,ip,port,title&quot;,
+    )
+    url := fmt.Sprintf(
+        &quot;%s?email=%s&amp;key=%s&amp;qbase64=%s&amp;fields=%s&quot;,
+        URLApi,
+        info.email,
+        info.apikey,
+        info.qbase64,
+        info.fields,
+    )
+    r, err := http.NewRequest(&quot;GET&quot;, url, nil)
+    if err != nil &#123;
+        log.Fatalln(&quot;数据错误&quot;)
+    &#125;
+    r.Header.Add(&quot;Content-Type&quot;, &quot;application/json&quot;)
+    resp, err := client.Do(r)
+    if err != nil &#123;
+        log.Fatalln(&quot;请求错误&quot;)
+    &#125;
+    ParseJson(resp.Body)
+&#125;
+</code></pre><h2 id="main-go"><a href="#main-go" class="headerlink" title="main.go"></a>main.go</h2><pre><code class="go">package main
+
+import &quot;blackgo/http/fofa&quot;
+
+func main() &#123;
+    fofa.GetFOFA()
+&#125;
+</code></pre><h1 id="与msf交互"><a href="#与msf交互" class="headerlink" title="与msf交互"></a>与msf交互</h1><pre><code class="shell">msf6 &gt; load msgrpc Pass=123.com ServerHost=192.168.50.136
+</code></pre><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326142446.png"><p>在vscode中设置代理（设置中搜索proxy）</p><pre><code class="shell">socks5://127.0.0.1:10808
+</code></pre><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326143211.png"><p>安装MSF通讯格式包（ MSF 使用的是一种紧凑高效的二进制格式 MessagePack 进行通信）</p><pre><code class="shell">go get gopkg.in/vmihailenco/msgpack.v2
+</code></pre><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326143228.png"><p><strong>msf.go</strong></p><pre><code class="go">package msfrpc
+
+import (
+    &quot;bytes&quot;
+    &quot;fmt&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+
+    &quot;gopkg.in/vmihailenco/msgpack.v2&quot;
+)
+
+// 请求结构体
+type SessionListReq struct &#123;
+    _msgpack struct&#123;&#125; `msgpack:&quot;,asArray&quot;`
+    Method   string
+    Token    string
+&#125;
+
+// 响应结构体
+type SessionListRes struct &#123;
+    ID          uint32 `msgpack:&quot;,omitempty&quot;`
+    Type        string `msgpack:&quot;type&quot;`
+    TunnelPeer  string `msgpack:&quot;tunnel_peer&quot;`
+    ViaExploit  string `msgpack:&quot;via_exploit&quot;`
+    ViaPayload  string `msgpack:&quot;via_payload&quot;`
+    Description string `msgpack:&quot;desc&quot;`
+    Info        string `msgpack:&quot;info&quot;`
+    Workspace   string `msgpack:&quot;workspace&quot;`
+    SessionHost string `msgpack:&quot;session_host&quot;`
+    SessionPort int    `msgpack:&quot;session_port&quot;`
+    Username    string `msgpack:&quot;username&quot;`
+    UUID        string `msgpack:&quot;uuid&quot;`
+    ExploitUUID string `msgpack:&quot;exploit_uuid&quot;`
+&#125;
+
+// 登录Metsploit
+type loginReq struct &#123;
+    _msgpack struct&#123;&#125; `msgpack:&quot;,asArray&quot;`
+    Method   string
+    Username string
+    Password string
+&#125;
+
+type loginRes struct &#123;
+    Result       string `msgpack:&quot;result&quot;`
+    Token        string `msgpack:&quot;token&quot;`
+    Error        bool   `msgpack:&quot;error&quot;`
+    ErrorClass   string `msgpack:&quot;error_class&quot;`
+    ErrorMessage string `msgpack:&quot;error_message&quot;`
+&#125;
+
+// 登出Metsploit
+type logoutReq struct &#123;
+    _msgpack    struct&#123;&#125; `msgpack:&quot;,asArray&quot;`
+    Method      string
+    Token       string
+    LogoutToken string
+&#125;
+
+type logoutRes struct &#123;
+    Result string `msgpack:&quot;result&quot;`
+&#125;
+
+type Metasploit struct &#123;
+    host  string
+    user  string
+    pass  string
+    token string
+&#125;
+
+func New(host, user, pass string) (*Metasploit, error) &#123;
+    msf := &amp;Metasploit&#123;
+        host: host,
+        user: user,
+        pass: pass,
+    &#125;
+    err := msf.Login()
+    if err != nil &#123;
+        return nil, err
+    &#125;
+    return msf, nil
+&#125;
+
+func (msf *Metasploit) send(req interface&#123;&#125;, res interface&#123;&#125;) error &#123;
+    buf := new(bytes.Buffer)
+    msgpack.NewEncoder(buf).Encode(req)
+    s := fmt.Sprintf(&quot;http://%s/api&quot;, msf.host)
+    r, err := http.Post(s, &quot;binary/message-pack&quot;, buf)
+    if err != nil &#123;
+        log.Fatalln(&quot;请求错误&quot;)
+    &#125;
+    defer r.Body.Close()
+    err = msgpack.NewDecoder(r.Body).Decode(&amp;res)
+    if err != nil &#123;
+        log.Fatalln(&quot;编码错误&quot;)
+    &#125;
+    return nil
+&#125;
+
+func (msf *Metasploit) Login() error &#123;
+    ctx := &amp;loginReq&#123;
+        Method:   &quot;auth.login&quot;,
+        Username: msf.user,
+        Password: msf.pass,
+    &#125;
+    var res loginRes
+    err := msf.send(ctx, &amp;res)
+    if err != nil &#123;
+        log.Fatalln(&quot;请求数据失败&quot;)
+    &#125;
+    msf.token = res.Token
+    return nil
+&#125;
+func (msf *Metasploit) Logout() error &#123;
+    ctx := &amp;logoutReq&#123;
+        Method:      &quot;auth.logout&quot;,
+        Token:       msf.token,
+        LogoutToken: msf.token,
+    &#125;
+    var res logoutRes
+    err := msf.send(ctx, &amp;res)
+    if err != nil &#123;
+        log.Fatalln(&quot;请求数据失败&quot;)
+    &#125;
+    msf.token = &quot;&quot;
+    return nil
+&#125;
+
+func (msf *Metasploit) SessionList() (map[uint32]SessionListRes, error) &#123;
+    req := &amp;SessionListReq&#123;
+        Method: &quot;session.list&quot;,
+        Token:  msf.token,
+    &#125;
+    res := make(map[uint32]SessionListRes)
+    err := msf.send(req, &amp;res)
+    if err != nil &#123;
+        log.Fatalln(&quot;请求数据失败&quot;)
+    &#125;
+    for id, session := range res &#123;
+        session.ID = id
+        res[id] = session
+    &#125;
+    return res, nil
+&#125;
+</code></pre><p><strong>client.go</strong></p><pre><code class="go">package msfclient
+
+import (
+    &quot;blackgo/http/msf/msfrpc&quot;
+    &quot;fmt&quot;
+    &quot;log&quot;
+)
+
+func init() &#123;
+    log.SetFlags(log.Ldate | log.Ltime | log.Llongfile)
+&#125;
+
+func Run() &#123;
+    host := &quot;192.168.50.136:55552&quot;
+    user := &quot;msf&quot;
+    pass := &quot;123.com&quot;
+    msf, err := msfrpc.New(host, user, pass)
+    if err != nil &#123;
+        log.Fatalln(&quot;连接错误&quot;)
+    &#125;
+    defer msf.Logout()
+    sessions, err := msf.SessionList()
+    if err != nil &#123;
+        log.Fatalln(&quot;请求数据失败&quot;)
+    &#125;
+    fmt.Println(&quot;Sessions : &quot;)
+    for _, session := range sessions &#123;
+        fmt.Printf(&quot;%5d %s\n&quot;, session.ID, session.Info)
+    &#125;
+
+&#125;
+</code></pre><p>只实现了查询当前shell</p><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326143244.png"><h1 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h1><p><strong>http.HandleFunc()</strong></p><pre><code class="go">http.HandleFunc(pattern string, handler func(ResponseWriter, *Request))
+</code></pre><p>该函数接收两个参数，一个字符串（该字符串是我们指示服务器去寻找的URL路径模式）和一个实际处理请求的函数</p><p>该函数既可以为匿名内联函数</p><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326143504.png"><p>还可以是自定义函数</p><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326143545.png"><p>而这个函数（自定义或内联）需要接收两个参数</p><ol><li>第一个是http.ResponWriter （用于写入对请求的响应）</li><li>第二个是指向http.Request 的指针 （它将允许我们从传入的请求中读取信息）</li></ol><p><strong>不是在主函数中调用manage</strong>，而指示告诉HTTP服务器对 &#x2F;hello 的所有请求都是由manage()函数处理</p><p><strong>http.ListenAndServer()</strong></p><pre><code class="go">http.ListenAndServe(addr string, handler Handler) error
+</code></pre><p>该函数接收两个参数，一个是字符串第二个是<code>http.Handler</code></p><p>通过使用第一个参数作为地址来启动HTTP服务器（这里用的8080）</p><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150022.png"><pre><code class="go">package httpserver
+
+import (
+    &quot;fmt&quot;
+    &quot;net/http&quot;
+)
+
+func manage(w http.ResponseWriter, r *http.Request) &#123;
+    fmt.Fprintf(w, &quot;hello %s\n&quot;, r.URL.Query().Get(&quot;name&quot;))
+&#125;
+
+func HttpServer() &#123;
+    http.HandleFunc(&quot;/hello&quot;, manage)
+    http.ListenAndServe(&quot;:8080&quot;, nil)
+&#125;
+</code></pre><h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>定义一个没有任何字段的名为Router的结构体，用来实现http.Handler，想要实现http.Handler得先定义方法ServerHTTP()</p><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150039.png"><pre><code class="go">package httpserver
+
+import (
+    &quot;fmt&quot;
+    &quot;net/http&quot;
+)
+
+type Router struct&#123;&#125;
+
+func (router *Router) ServeHTTP(w http.ResponseWriter, r *http.Request) &#123;
+    switch r.URL.Path &#123;
+    case &quot;/a&quot;:
+        fmt.Fprintf(w, &quot;这里是A界面&quot;)
+    case &quot;/b&quot;:
+        fmt.Fprintf(w, &quot;这里是B界面&quot;)
+    case &quot;/c&quot;:
+        fmt.Fprintf(w, &quot;这里是C界面&quot;)
+    default:
+        fmt.Fprintf(w, &quot;404&quot;)
+    &#125;
+&#125;
+
+func HttpRouter() &#123;
+    var router Router
+    http.ListenAndServe(&quot;:8080&quot;, &amp;router)
+&#125;
+</code></pre><p>最终实现根据URL路径显示不同的效果</p><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150116.png"> <img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150120.png"><h3 id="gorilla-mux路由"><a href="#gorilla-mux路由" class="headerlink" title="gorilla&#x2F;mux路由"></a>gorilla&#x2F;mux路由</h3><p>可以基于简单和复杂模式进行路由，包含正则表达式、参数匹配、动词匹配、子路由以及其他功能进行匹配</p><pre><code class="shell">go get github.com/gorilla/mux
+</code></pre><p><strong>创建路由器</strong></p><pre><code class="go">r := mux.NewRouter() // 返回的类型实现了接口http.Handler
+</code></pre><p><strong>根据请求方法匹配路由</strong></p><pre><code class="go">package httpserver
+
+import (
+    &quot;fmt&quot;
+    &quot;net/http&quot;
+
+    &quot;github.com/gorilla/mux&quot;
+)
+
+func MuxRouter() &#123;
+    r := mux.NewRouter()
+    r.HandleFunc(&quot;/mpy&quot;, func(w http.ResponseWriter, r *http.Request) &#123;
+        fmt.Fprintf(w, &quot;hello mpy&quot;)
+    &#125;).Methods(&quot;Post&quot;)
+    http.ListenAndServe(&quot;:8080&quot;, r)
+&#125;
+</code></pre><p>正常GET请求</p><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150208.png"><p>换成POST请求</p><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150217.png"><p><strong>根据HOST匹配</strong></p><pre><code class="go">package httpserver
+
+import (
+    &quot;fmt&quot;
+    &quot;net/http&quot;
+
+    &quot;github.com/gorilla/mux&quot;
+)
+
+func MuxRouterHost() &#123;
+    r := mux.NewRouter()
+    r.HandleFunc(&quot;/mpy&quot;, func(w http.ResponseWriter, r *http.Request) &#123;
+        fmt.Fprintf(w, &quot;hello mpy&quot;)
+    &#125;).Host(&quot;www.mpy.com&quot;)
+    http.ListenAndServe(&quot;:8080&quot;, r)
+&#125;
+</code></pre><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150243.png"> <img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150253.png"><p><strong>请求路径匹配传递参数</strong></p><p>打印&#x2F;mpy&#x2F;路径后面的参数</p><p>在定义请求路径时，可以使用<strong>花括号</strong>来定义请求参数，可以将此看为占位符，之后使用 mux.Vars()将请求对象传递给它，此时会返回 <strong>map[string]string</strong> 类型，是请求参数名称到他们各自值的映射</p><pre><code class="go">package httpserver
+
+import (
+    &quot;fmt&quot;
+    &quot;net/http&quot;
+
+    &quot;github.com/gorilla/mux&quot;
+)
+
+func MuxRouterPath() &#123;
+    r := mux.NewRouter()
+    r.HandleFunc(&quot;/mpy/&#123;user&#125;&quot;, func(w http.ResponseWriter, r *http.Request) &#123;
+        user := mux.Vars(r)[&quot;user&quot;]
+        fmt.Fprintf(w, &quot;hello %s&quot;, user)
+    &#125;)
+    http.ListenAndServe(&quot;:8080&quot;, r)
+&#125;
+</code></pre><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150332.png"><p><strong>通过正则限制</strong></p><p>前面通过占位符来传递请求参数，还可以通过正则来限制参数类型</p><pre><code class="go">package httpserver
+
+import (
+    &quot;fmt&quot;
+    &quot;net/http&quot;
+
+    &quot;github.com/gorilla/mux&quot;
+)
+
+func MuxRouterRegPath() &#123;
+    r := mux.NewRouter()
+    r.HandleFunc(&quot;/mpy/&#123;user:[a-z]+&#125;&quot;, func(w http.ResponseWriter, r *http.Request) &#123;
+        user := mux.Vars(r)[&quot;user&quot;]
+        fmt.Fprintf(w, &quot;hello %s&quot;, user)
+    &#125;)
+    http.ListenAndServe(&quot;:8080&quot;, r)
+&#125;
+</code></pre><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150353.png"> <img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150357.png"> <img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150401.png"><p>自此只会匹配小写字母的请求</p><h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>中间件是一种包装程序，它将在所有传入请求上执行，而与目标函数无关</p><pre><code class="go">package httpserver
+
+import (
+    &quot;fmt&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+)
+
+type logger struct &#123;
+    Inner http.Handler
+&#125;
+
+func (l *logger) ServeHTTP(w http.ResponseWriter, r *http.Request) &#123;
+    log.Println(&quot;start&quot;)
+    l.Inner.ServeHTTP(w, r)
+    log.Println(&quot;end&quot;)
+&#125;
+
+func hello(w http.ResponseWriter, r *http.Request) &#123;
+    fmt.Fprintf(w, &quot;hello&quot;)
+&#125;
+func HttpMiddleWare() &#123;
+    f := http.HandlerFunc(hello)
+    l := logger&#123;Inner: f&#125;
+    http.ListenAndServe(&quot;:8080&quot;, &amp;l)
+&#125;
+</code></pre><p>每次服务器收到请求都会在服务器上记录一些信息并调用函数hello()</p><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150450.png"><h3 id="negroni中间件"><a href="#negroni中间件" class="headerlink" title="negroni中间件"></a>negroni中间件</h3><pre><code class="go">package httpserver
+
+import (
+    &quot;net/http&quot;
+
+    &quot;github.com/gorilla/mux&quot;
+    &quot;github.com/urfave/negroni&quot;
+)
+
+func NegroniRouter() &#123;
+    r := mux.NewRouter()
+    n := negroni.Classic()
+    n.UseHandler(r)
+    http.ListenAndServe(&quot;:8080&quot;, n)
+&#125;
+</code></pre><ol><li>先创建路由器</li><li>创建negroni.Classic()使用默认的中间件（包括请求记录器、紧急情况下的进行拦截和恢复的中间件，以及服务于同一目录中公用文件夹的中间件，而negroni.New()则不会创建任何默认的中间件）</li><li>通过n.UseHandler()将路由器添加到中间件堆栈</li></ol><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150513.png"> <img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150517.png"><p><strong>身份认证</strong></p><pre><code class="go">package httpserver
+
+import (
+    &quot;context&quot;
+    &quot;fmt&quot;
+    &quot;net/http&quot;
+
+    &quot;github.com/gorilla/mux&quot;
+    &quot;github.com/urfave/negroni&quot;
+)
+
+type userInfo struct &#123;
+    Username string
+    Password string
+&#125;
+
+func (info *userInfo) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) &#123;
+    userinfo := make(map[string]string, 10)
+    user := r.URL.Query().Get(&quot;user&quot;)
+    pass := r.URL.Query().Get(&quot;pass&quot;)
+    userinfo[user] = pass
+    if user != info.Username || pass != info.Password &#123;
+        http.Error(w, &quot;user or pass error&quot;, 404)
+        return
+    &#125;
+    ctx := context.WithValue(r.Context(), &quot;xx&quot;, userinfo)
+    r = r.WithContext(ctx)
+    next(w, r)
+&#125;
+
+func manages(w http.ResponseWriter, r *http.Request) &#123;
+    info := r.Context().Value(&quot;xx&quot;).(map[string]string)
+    for user, pass := range info &#123;
+        fmt.Fprintf(w, &quot;Hi %v\nPass %v\n&quot;, user, pass)
+    &#125;
+
+&#125;
+
+func LoginNegroniRouter() &#123;
+    r := mux.NewRouter()
+    r.HandleFunc(&quot;/hello&quot;, manages).Methods(&quot;Get&quot;)
+    n := negroni.Classic()
+    n.Use(&amp;userInfo&#123;
+        Username: &quot;admin&quot;,
+        Password: &quot;pass&quot;,
+    &#125;)
+    n.UseHandler(r)
+    http.ListenAndServe(&quot;:8080&quot;, n)
+&#125;
+</code></pre><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150618.png"><p><strong>创建模板页面</strong></p><pre><code class="go">package httpserver
+
+import (
+    &quot;log&quot;
+    &quot;os&quot;
+    &quot;text/template&quot;
+)
+
+var temp = `
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;测试页面&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;&#123;&#123;.&#125;&#125;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+`
+
+func HTMLTemp() &#123;
+    t, err := template.New(&quot;a&quot;).Parse(temp)
+    if err != nil &#123;
+        log.Fatalln(&quot;创建失败&quot;)
+    &#125;
+    t.Execute(os.Stdout, &quot;123&quot;)
+&#125;
+</code></pre><img data-src="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/20230326150608.png"><div class="tags"><a href="/tags/Golang/" rel="tag"><i class="ic i-tag"></i> Golang</a> <a href="/tags/Golang%E9%A1%B9%E7%9B%AE/" rel="tag"><i class="ic i-tag"></i> Golang项目</a></div></div><footer><div class="meta"></div><div class="reward"><button><i class="ic i-heartbeat"></i> 赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img data-src="/images/wechatpay.png" alt="余星酒 微信支付"><p>微信支付</p></div><div><img data-src="/images/alipay.png" alt="余星酒 支付宝"><p>支付宝</p></div><div><img data-src="/images/paypal.png" alt="余星酒 贝宝"><p>贝宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者： </strong>余星酒 <i class="ic i-at"><em>@</em></i>余星酒</li><li class="link"><strong>本文链接：</strong> <a href="http://example.com/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="客户端与服务器">http://example.com/Program/golang/项目/客户端与服务器/</a></li><li class="license"><strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/Program/golang/%E9%A1%B9%E7%9B%AE/TCP%E6%89%AB%E6%8F%8F%E5%99%A8%E5%92%8C%E4%BB%A3%E7%90%86/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciukx8a7j20zk0m8aio.jpg" title="TCP扫描器和代理"><span class="type">上一篇</span> <span class="category"><i class="ic i-flag"></i> 项目</span><h3>TCP扫描器和代理</h3></a></div><div class="item right"><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E6%BC%8F%E6%B4%9E%E5%AE%A1%E8%AE%A1/XXE/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciryrr3rj20zk0m8nhk.jpg" title="XXE"><span class="type">下一篇</span> <span class="category"><i class="ic i-flag"></i> Java漏洞审计</span><h3>XXE</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E8%AF%B7%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">HTTP请求</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#http"><span class="toc-number">1.1.</span> <span class="toc-text">http</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-Get"><span class="toc-number">1.1.1.</span> <span class="toc-text">http.Get()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-Post"><span class="toc-number">1.1.2.</span> <span class="toc-text">http.Post()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-PostForm"><span class="toc-number">1.1.3.</span> <span class="toc-text">http.PostForm()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-Head"><span class="toc-number">1.1.4.</span> <span class="toc-text">http.Head()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E8%AF%B7%E6%B1%82"><span class="toc-number">1.2.</span> <span class="toc-text">生成请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#get-%E8%AF%B7%E6%B1%82"><span class="toc-number">1.2.1.</span> <span class="toc-text">get 请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#post-%E8%AF%B7%E6%B1%82"><span class="toc-number">1.2.2.</span> <span class="toc-text">post 请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E8%A7%A3%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">结构化解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%A7%A3%E6%9E%90"><span class="toc-number">1.3.1.</span> <span class="toc-text">内容解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#json-%E8%A7%A3%E6%9E%90"><span class="toc-number">1.3.2.</span> <span class="toc-text">json 解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8Efofa%E4%BA%A4%E4%BA%92"><span class="toc-number">2.</span> <span class="toc-text">与fofa交互</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#api-go"><span class="toc-number">2.1.</span> <span class="toc-text">api.go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get-information-go"><span class="toc-number">2.2.</span> <span class="toc-text">get_information.go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-go"><span class="toc-number">2.3.</span> <span class="toc-text">main.go</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8Emsf%E4%BA%A4%E4%BA%92"><span class="toc-number">3.</span> <span class="toc-text">与msf交互</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-number">4.1.</span> <span class="toc-text">路由器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gorilla-mux%E8%B7%AF%E7%94%B1"><span class="toc-number">4.1.1.</span> <span class="toc-text">gorilla&#x2F;mux路由</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#negroni%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-number">4.2.1.</span> <span class="toc-text">negroni中间件</span></a></li></ol></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li><a href="/Program/golang/%E9%A1%B9%E7%9B%AE/TCP%E6%89%AB%E6%8F%8F%E5%99%A8%E5%92%8C%E4%BB%A3%E7%90%86/" rel="bookmark" title="TCP扫描器和代理">TCP扫描器和代理</a></li><li class="active"><a href="/Program/golang/%E9%A1%B9%E7%9B%AE/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="bookmark" title="客户端与服务器">客户端与服务器</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="image" itemprop="image" alt="余星酒" data-src="/images/avatar.jpg"><p class="name" itemprop="name">余星酒</p><div class="description" itemprop="description">欢迎参观我的笔记空间 ~ 这里主要会记录一些安全相关的学习笔记 🌸</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">190</span> <span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">38</span> <span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">30</span> <span class="name">标签</span></a></div></nav><div class="social"></div><ul class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li><li class="item dropdown"><a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a><ul class="submenu"><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></li></ul></div></div></div><ul id="quick"><li class="prev pjax"><a href="/Program/golang/%E9%A1%B9%E7%9B%AE/TCP%E6%89%AB%E6%8F%8F%E5%99%A8%E5%92%8C%E4%BB%A3%E7%90%86/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E6%BC%8F%E6%B4%9E%E5%AE%A1%E8%AE%A1/XXE/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/Program/" title="分类于 编程">编程</a> <i class="ic i-angle-right"></i> <a href="/categories/Program/Golang/" title="分类于 Golang">Golang</a> <i class="ic i-angle-right"></i> <a href="/categories/Program/Golang/%E5%9F%BA%E7%A1%80/" title="分类于 基础">基础</a></div><span><a href="/Program/golang/%E5%85%A5%E9%97%A8/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" title="流程控制">流程控制</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/APT/" title="分类于 渗透测试">渗透测试</a> <i class="ic i-angle-right"></i> <a href="/categories/APT/%E5%B7%A5%E5%85%B7/" title="分类于 工具">工具</a></div><span><a href="/APT/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/BurpSuite/" title="BurpSuite">BurpSuite</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/APT/" title="分类于 渗透测试">渗透测试</a> <i class="ic i-angle-right"></i> <a href="/categories/APT/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" title="分类于 漏洞复现">漏洞复现</a></div><span><a href="/APT/%E9%9D%B6%E5%9C%BAwp/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/" title="中间件漏洞">中间件漏洞</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="分类于 网络基础">网络基础</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%AE%9E%E9%AA%8C/" title="分类于 实验">实验</a></div><span><a href="/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%AE%9E%E9%AA%8C/%E4%B8%89%E5%B1%82%E9%80%9A%E4%BF%A1/" title="三层通信">三层通信</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/APT/" title="分类于 渗透测试">渗透测试</a> <i class="ic i-angle-right"></i> <a href="/categories/APT/web%E6%B8%97%E9%80%8F/" title="分类于 web渗透">web渗透</a></div><span><a href="/APT/web%E6%B8%97%E9%80%8F/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/" title="未授权访问">未授权访问</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/" title="分类于 深信服设备">深信服设备</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/%E5%AE%9E%E9%AA%8C/" title="分类于 实验">实验</a></div><span><a href="/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/%E5%AE%9E%E9%AA%8C/VPN/SSL%20VPN%20%E6%90%AD%E5%BB%BA/" title="SSL VPN 搭建">SSL VPN 搭建</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/" title="分类于 深信服设备">深信服设备</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/AC/" title="分类于 AC">AC</a></div><span><a href="/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/%E6%B7%B1%E4%BF%A1%E6%9C%8D/AC/%E8%AE%A4%E8%AF%86AC/" title="认识AC">认识AC</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/APT/" title="分类于 渗透测试">渗透测试</a> <i class="ic i-angle-right"></i> <a href="/categories/APT/%E5%B7%A5%E5%85%B7/" title="分类于 工具">工具</a></div><span><a href="/APT/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Nmap/" title="Nmap">Nmap</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/" title="分类于 深信服设备">深信服设备</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/%E5%AE%9E%E9%AA%8C/" title="分类于 实验">实验</a></div><span><a href="/Network/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87/%E5%AE%9E%E9%AA%8C/AF/%E9%98%B2DOS/" title="防DOS">防DOS</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/APT/" title="分类于 渗透测试">渗透测试</a> <i class="ic i-angle-right"></i> <a href="/categories/APT/%E9%9D%B6%E5%9C%BA/" title="分类于 靶场">靶场</a></div><span><a href="/APT/%E9%9D%B6%E5%9C%BAwp/%E9%9D%B6%E5%9C%BA/vulnhub/grotesque3/" title="grotesque3">grotesque3</a></span></li></ul></div><div><h2>最新评论</h2><ul class="leancloud-recent-comment"></ul></div></div><div class="status"><div class="copyright">&copy; 2010 – <span itemprop="copyrightYear">2023</span> <span class="with-love"><i class="ic i-sakura rotate"></i> </span><span class="author" itemprop="copyrightHolder">余星酒 @ 余星酒</span></div><div class="powered-by">基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL={path:"Program/golang/项目/客户端与服务器/",favicon:{show:"（●´3｀●）やれやれだぜ",hide:"(´Д｀)大変だ！"},search:{placeholder:"文章搜索",empty:"关于 「 ${query} 」，什么也没搜到",stats:"${time} ms 内找到 ${hits} 条结果"},valine:!0,fancybox:!0,copyright:'复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',ignores:[function(e){return e.includes("#")},function(e){return new RegExp(LOCAL.path+"$").test(e)}]}</script><script src="https://cdn.polyfill.io/v2/polyfill.js"></script><script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script><script src="/js/app.js?v=0.2.5"></script></body></html><!-- rebuild by hrmmi -->
